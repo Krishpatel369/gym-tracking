@@ -1,6 +1,6 @@
 <div align="center">
 
-# 💪 Lifeline Fitness — Grind Log 🔥
+# 💪 Daily Habits Tracking 🔥
 
 **Your personal gym, habit & workout tracker — right in your phone's browser.**
 
@@ -15,9 +15,9 @@
 
 ---
 
-## ✨ What is Grind Log?
+## ✨ What is Daily Habits Tracking?
 
-**Grind Log** is the training companion for **Lifeline Fitness (Ladies & Gents)** 🏋️‍♂️🏋️‍♀️.
+**Daily Habits Tracking** is your personal training companion 🏋️‍♂️🏋️‍♀️.
 Plan your workouts, tick off daily habits, track your steps and water, and see your progress
 by day, week and month — all with a bold black-and-yellow gym look. 🟨⬛
 
@@ -59,10 +59,11 @@ by day, week and month — all with a bold black-and-yellow gym look. 🟨⬛
 ## 📂 Project Structure
 
 ```
-lifeline-fitness/
+daily-habits/
 ├── 📄 index.html      # App shell
 ├── 🎨 style.css       # Styling
-├── ⚡ script.js       # App logic (bundled)
+├── ⚡ script.js       # App logic (bundled, logo embedded for PDFs)
+├── 🖼️ logo.png        # Daily Habit Tracking logo (page header)
 └── 📘 README.md       # You are here
 ```
 
@@ -103,7 +104,7 @@ Fork → create a branch → commit → open a Pull Request.
 
 ## 📬 Contact
 
-Made with ❤️ and 💪 for **Lifeline Fitness**.
+Made with ❤️ and 💪.
 Questions or feedback? Open an **Issue** on this repo. ⭐ Star it if you like it!
 
 <div align="center">
