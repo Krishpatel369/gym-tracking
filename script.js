@@ -437,9 +437,23 @@ var kfmt=function(n){return n>=10000?(n/1000).toFixed(0)+'k':n>=1000?(n/1000).to
 var nfmt=function(n){return Math.round(n).toLocaleString('en-US')};
 
 /* ---------- sample plan (all editable in Setup) ---------- */
+/* every training day starts with 1) Warm up 2) Cycle 3) Treadmill, then the day's own exercises (Mon-Sat; Sunday stays a rest day) */
+function addDailyGym(plan){
+  var want=[['Warm up',15],['Cycle',15],['Treadmill',10]];
+  [1,2,3,4,5,6].forEach(function(i){
+    var pd=plan[i];if(!pd||pd.rest||!Array.isArray(pd.exercises))return;
+    var head=want.map(function(w){
+      var n=w[0].toLowerCase(),f=null;
+      pd.exercises=pd.exercises.filter(function(e){if(!f&&String(e.name).toLowerCase()===n){f=e;return false}return String(e.name).toLowerCase()!==n});
+      return f||{id:uid(),name:w[0],sets:1,reps:String(w[1]),weight:'0',min:String(w[1]),sec:''};
+    });
+    if(head[0].min==='5'&&head[0].reps==='5'){head[0].min='15';head[0].reps='15'}
+    pd.exercises=head.concat(pd.exercises);
+  });
+}
 function defaults(){
   var ex=function(n,s,r,w){return {id:uid(),name:n,sets:s,reps:r,weight:w}};
-  return {
+  var o={
     v:1,stepGoal:10000,affirmation:'focused, strong and consistent.',
     habits:[
       {id:uid(),name:'Wake up at 5 AM',cat:'Health',goal:20},
@@ -474,6 +488,8 @@ function defaults(){
     },
     days:{}
   };
+  addDailyGym(o.plan);o.dailyGym=3;
+  return o;
 }
 function fixDay(d){
   if(!d||typeof d!=='object'||Array.isArray(d))d={};
@@ -499,6 +515,7 @@ function norm(s){
     if(typeof pd.title!=='string')pd.title=d.plan[i].title;
     pd.rest=!!pd.rest;
   }
+  if(s.dailyGym!==3){s.dailyGym=3;addDailyGym(s.plan)}
   if(!Array.isArray(s.habits))s.habits=d.habits;
   if(!Array.isArray(s.routine))s.routine=d.routine;
   if(!s.days||typeof s.days!=='object'||Array.isArray(s.days))s.days={};
